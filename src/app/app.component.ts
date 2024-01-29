@@ -14,7 +14,7 @@ export class Car {
 export class AppComponent {
   title = 'wsearch';
 
-  constructor(private wikipediaService: WikipediaService, private car: Car) {}
+  constructor(private car: Car, private wikipediaService: WikipediaService) {}
 
   onTerm(term: string) {
     const results = this.wikipediaService.search(term);
@@ -22,3 +22,7 @@ export class AppComponent {
     console.log('My car has a color of', this.car.color);
   }
 }
+
+const car = new Car();
+const wikipedia = new WikipediaService();
+new AppComponent(car, wikipedia);
