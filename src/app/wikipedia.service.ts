@@ -1,10 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-const observable = new Observable((observer) => {
-  observer.next(1);
-});
+interface Car {
+  year: number;
+  color: string;
+  running: boolean;
+  make: {
+    name: string;
+    dateCreated: number;
+  };
+}
+
+const observable = new Observable<Car>((observer) => {
+  observer.next({
+    year: 200,
+    color: 'red',
+    running: true,
+    make: {
+      name: 'Chevy',
+      dateCreated: 20240201,
+    },
+  });
+}).pipe(map((car) => car.make.dateCreated));
 
 observable.subscribe((value) => {
   console.log(value);
